@@ -35,7 +35,7 @@
                     In Blazor, form validation is usually done with EditForm in conjunction with a form model class that is decorated with <MudLink Href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-3.1">data annotations</MudLink>. MudBlazor's input components support
                     Blazor's form validation if you put them into a <CodeInline>&lt;EditForm&gt;</CodeInline>. The following example shows a very simple use case. If you want to learn more, please check out
                     <MudLink Href="https://docs.microsoft.com/en-us/aspnet/core/blazor/forms-validation?view=aspnetcore-3.1">ASP.NET Core Blazor forms and validation</MudLink> on the official Blazor documentation.
-                    <br /><br />
+                    <br />
                     <MudAlert Severity="Severity.Info" Dense="true" Class="mt-3">
                         Note: for EditForm validation to work make sure to set <CodeInline>ButtonType="ButtonType.Submit"</CodeInline> and do not use a MudForm.
                     </MudAlert>
@@ -76,7 +76,7 @@
             <SectionHeader Title="Validate only on user interaction">
                 <Description>
                     Normally input fields are validated when leaving the input field. This behavior can be changed with the flag <CodeInline>OnlyValidateIfDirty</CodeInline> If this flag is set to <CodeInline>true</CodeInline>, the input field will only be validated if the user has changed the initial value.
-                    <br /><br />
+                    <br />
                     <MudAlert Severity="Severity.Info" Dense="true" Class="mt-3">
                         Note: The <CodeInline>OnlyValidateIfDirty</CodeInline> setting should not be changed dynamically
                     </MudAlert>
