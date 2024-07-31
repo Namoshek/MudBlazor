@@ -2,79 +2,77 @@
 @using FluentValidation
 
 <MudCard>
-	<MudForm Model="@model" @ref="@form" Validation="@(orderValidator.ValidateValue)" ValidationDelay="0">
-		<MudCardContent>
-				<MudTextField @bind-Value="model.Name"                              
-							  For="@(() => model.Name)"
-							  Immediate="true"
-							  Label="Name" />
+    <MudForm Model="@model" @ref="@form" Validation="@(orderValidator.ValidateValue)" ValidationDelay="0">
+        <MudCardContent>
+            <MudTextField @bind-Value="model.Name"                              
+                          For="@(() => model.Name)"
+                          Immediate="true"
+                          Label="Name" />
 
-				<MudTextField @bind-Value="model.Email"
-							  For="@(() => model.Email)"
-							  Immediate="true"
-							  Label="Email" />
+            <MudTextField @bind-Value="model.Email"
+                          For="@(() => model.Email)"
+                          Immediate="true"
+                          Label="Email" />
 
-				<MudTextField @bind-Value="model.CCNumber"
-							  For="@(() => model.CCNumber)"
-							  Immediate="true"
-							  Label="Credit card nr" />
+            <MudTextField @bind-Value="model.CCNumber"
+                          For="@(() => model.CCNumber)"
+                          Immediate="true"
+                          Label="Credit card nr" />
 
-				<MudTextField @bind-Value="model.Address.Address"
-							  For="@(() => model.Address.Address)"
-							  Immediate="true"
-							  Label="Address" />
+            <MudTextField @bind-Value="model.Address.Address"
+                          For="@(() => model.Address.Address)"
+                          Immediate="true"
+                          Label="Address" />
 
-				<MudTextField @bind-Value="model.Address.City"
-							  For="@(() => model.Address.City)"
-							  Immediate="true"
-							  Label="City" />
+            <MudTextField @bind-Value="model.Address.City"
+                          For="@(() => model.Address.City)"
+                          Immediate="true"
+                          Label="City" />
 
-				<MudTextField @bind-Value="model.Address.Country"
-							  For="@(() => model.Address.Country)"
-							  Immediate="true"
-							  Label="Country" />
+            <MudTextField @bind-Value="model.Address.Country"
+                          For="@(() => model.Address.Country)"
+                          Immediate="true"
+                          Label="Country" />
         </MudCardContent>
-		<MudCardContent Class="pa-0">
-
-			<MudTable Items="@model.OrderDetails" Hover="true" Breakpoint="Breakpoint.None" Dense="@true" Elevation="0">
-				<HeaderContent>
-					<MudTh>Description</MudTh>
-					<MudTh>Offer</MudTh>
-				</HeaderContent>
-				<RowTemplate>
-					<MudTd DataLabel="Description">
-						<MudForm Model="@context" Validation=@(orderDetailsValidator.ValidateValue)>
-  							<MudTextField Label="Enter Description" 
-                              @bind-Value="context.Description" 
-                              For="(() => context.Description)" />
-  						</MudForm>
-					</MudTd>
-					<MudTd DataLabel="Offer">
-						<MudForm Model="@context">
-  							<MudNumericField Label="Enter Offer" 
-                                               @bind-Value="context.Offer" 
-                                               Validation=@(orderDetailsValidator.ValidateValue)
-                                               For="(() => context.Offer)" />
-  						</MudForm>
-					</MudTd>
-				</RowTemplate>
-			</MudTable>
-
-		</MudCardContent>
-	</MudForm>
+        <MudCardContent Class="pa-0">
+            <MudTable Items="@model.OrderDetails" Hover="true" Breakpoint="Breakpoint.None" Dense="@true" Elevation="0">
+                <HeaderContent>
+                    <MudTh>Description</MudTh>
+                    <MudTh>Offer</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Description">
+                        <MudForm Model="@context" Validation=@(orderDetailsValidator.ValidateValue)>
+                            <MudTextField Label="Enter Description" 
+                                          @bind-Value="context.Description" 
+                                          For="(() => context.Description)" />
+                        </MudForm>
+                    </MudTd>
+                    <MudTd DataLabel="Offer">
+                        <MudForm Model="@context">
+                            <MudNumericField Label="Enter Offer" 
+                                             @bind-Value="context.Offer" 
+                                             Validation=@(orderDetailsValidator.ValidateValue)
+                                             For="(() => context.Offer)" />
+                        </MudForm>
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        </MudCardContent>
+    </MudForm>
     <MudCardActions>
         <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await Submit())">Order</MudButton>
     </MudCardActions>
 </MudCard>
 
 @code {
-	[Inject] ISnackbar Snackbar { get; set; }
+    [Inject] ISnackbar Snackbar { get; set; }
 
     MudForm form;
 
     OrderModelFluentValidator orderValidator = new OrderModelFluentValidator();
 
-	OrderDetailsModelFluentValidator orderDetailsValidator = new OrderDetailsModelFluentValidator();
+    OrderDetailsModelFluentValidator orderDetailsValidator = new OrderDetailsModelFluentValidator();
 
     OrderModel model = new OrderModel();
 
@@ -84,16 +82,16 @@
         public string Email { get; set; }
         public string CCNumber { get; set; } = "4012 8888 8888 1881";
         public AddressModel Address { get; set; } = new AddressModel();
-		public List<OrderDetailsModel> OrderDetails = new List<OrderDetailsModel>()
-		{
-			new OrderDetailsModel()
-				{
-					Description = "Perform Work order 1",
-					Offer = 100
-				},
-			new OrderDetailsModel()
-		};
-	}
+        public List<OrderDetailsModel> OrderDetails = new List<OrderDetailsModel>()
+        {
+            new OrderDetailsModel()
+                {
+                    Description = "Perform Work order 1",
+                    Offer = 100
+                },
+            new OrderDetailsModel()
+        };
+    }
 
     public class AddressModel
     {
@@ -102,11 +100,11 @@
         public string Country { get; set; }
     }
 
-	public class OrderDetailsModel
-	{
-		public string Description { get; set; }
-		public decimal Offer { get; set; }
-	}
+    public class OrderDetailsModel
+    {
+        public string Description { get; set; }
+        public decimal Offer { get; set; }
+    }
 
     private async Task Submit()
     {
@@ -153,9 +151,9 @@
                 .NotEmpty()
                 .Length(1,100);
 
-			RuleForEach(x => x.OrderDetails)
-				.SetValidator(new OrderDetailsModelFluentValidator());
-		}
+            RuleForEach(x => x.OrderDetails)
+                .SetValidator(new OrderDetailsModelFluentValidator());
+        }
 
         private async Task<bool> IsUniqueAsync(string email)
         {
@@ -173,7 +171,7 @@
         };
     }
 
-	/// <summary>
+    /// <summary>
     /// A standard AbstractValidator for the Collection Object
     /// </summary>
     /// <typeparam name="OrderDetailsModel"></typeparam>
@@ -185,9 +183,9 @@
                 .NotEmpty()
                 .Length(1,100);
 
-			RuleFor(x => x.Offer)
-				.GreaterThan(0)
-				.LessThan(999);
+            RuleFor(x => x.Offer)
+                .GreaterThan(0)
+                .LessThan(999);
         }
 
         public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
