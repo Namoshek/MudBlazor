@@ -9,24 +9,20 @@
         <MudMenuItem OnClick="() => SetButtonText(3)">Reply & Delete</MudMenuItem>
     </MudMenu>
 </MudButtonGroup>
+
 @code {
     private string _buttonText = "Reply";
 
     private void SetButtonText(int id)
     {
-        switch (id)
+        _buttonText = id switch
         {
-            case 0: _buttonText = "Reply";
-                break;
-            case 1:
-                _buttonText = "Reply All";
-                break;
-            case 2:
-                _buttonText = "Forward";
-                break;
-            case 3:
-                _buttonText = "Reply & Delete";
-                break;
-        }
+            0 => "Reply",
+            1 => "Reply All",
+            2 => "Forward",
+            3 => "Reply & Delete",
+
+            _ => "Reply",
+        };
     }
 }

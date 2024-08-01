@@ -13,6 +13,8 @@
 
 @code {
     private ChartOptions options = new ChartOptions();
+    private Random random = new Random();
+
     public List<ChartSeries> Series = new List<ChartSeries>()
     {
         new ChartSeries() { Name = "Series 1", Data = new double[] { 90, 79, 72, 69, 62, 62, 55, 65, 70 } },
@@ -20,7 +22,6 @@
     };
     public string[] XAxisLabels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep" };
 
-    Random random = new Random();
     protected override void OnInitialized()
     {
         options.InterpolationOption = InterpolationOption.NaturalSpline;
@@ -48,6 +49,4 @@
         options.InterpolationOption = interpolationOption;
         StateHasChanged();
     }
-
-
 }

@@ -5,52 +5,52 @@
 <MudGrid>
     <MudItem xs="12" sm="6" md="4">
         <EditForm EditContext="editContext1">
-        <DataAnnotationsValidator />
+            <DataAnnotationsValidator />
             <MudAutocomplete Label="US States" @bind-Value="choice1.State" Required="true"
-             SearchFunc="@SearchAsync" Immediate="true" CoerceValue="@coerceValue" ResetValueOnEmptyText="true"
-             AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary"
-             For="@(() => choice1.State)"/>
-            <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" 
-             Class="ml-auto mt-3 mb-3" OnClick="@(()=>success1=editContext1.Validate())">Validate</MudButton>
-                   @if (success1)
-                   {
-                       <MudText Color="Color.Success">Success</MudText>
-                   }
+                             SearchFunc="@SearchAsync" Immediate="true" CoerceValue="@coerceValue" ResetValueOnEmptyText="true"
+                             AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary"
+                             For="@(() => choice1.State)" />
+            <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary"
+                       Class="ml-auto mt-3 mb-3" OnClick="@(()=>success1=editContext1.Validate())">Validate</MudButton>
+            @if (success1)
+            {
+                <MudText Color="Color.Success">Success</MudText>
+            }
         </EditForm>
     </MudItem>
     <MudItem xs="12" sm="6" md="4">
         <EditForm EditContext="editContext2">
-        <DataAnnotationsValidator />
+            <DataAnnotationsValidator />
             <MudAutocomplete Label="US States" @bind-Value="choice2.State" Required="true"
-             SearchFunc="@SearchAsync" Immediate="true" CoerceValue="@coerceValue" ResetValueOnEmptyText="true"
-             OpenIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary"
-             Validation="@(new Func<string, IEnumerable<string>>(Validate))" />
-            <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary" 
+                             SearchFunc="@SearchAsync" Immediate="true" CoerceValue="@coerceValue" ResetValueOnEmptyText="true"
+                             OpenIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary"
+                             Validation="@(new Func<string, IEnumerable<string>>(Validate))" />
+            <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary"
                        Class="ml-auto mt-3 mb-3" OnClick="@(()=>success2=editContext2.Validate())">Validate</MudButton>
-                   @if (success2)
-                   {
-                       <MudText Color="Color.Success">Success</MudText>
-                   }
+            @if (success2)
+            {
+                <MudText Color="Color.Success">Success</MudText>
+            }
         </EditForm>
     </MudItem>
     <MudItem xs="12" sm="6" md="4">
         <MudForm @ref="form">
             <MudAutocomplete T="string" Label="US States" @bind-Value="choice3.State" Required="true"
-             SearchFunc="@SearchAsync" Immediate="true" CoerceValue="@coerceValue" ResetValueOnEmptyText="true"
-             CloseIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Tertiary"
-             Validation="@(new Func<string, IEnumerable<string>>(Validate))" />
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto mt-3 mb-3" 
-             OnClick="@(()=>form.Validate())">Validate</MudButton>
-                    @if (form.IsTouched && form.IsValid)
-                    {
-                        <MudText Color="Color.Success">Success</MudText>
-                    }
-                    else
-                    {
-                        <MudText>IsTouched: @form.IsTouched, IsValid: @form.IsValid</MudText>
-                    }
+                             SearchFunc="@SearchAsync" Immediate="true" CoerceValue="@coerceValue" ResetValueOnEmptyText="true"
+                             CloseIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Tertiary"
+                             Validation="@(new Func<string, IEnumerable<string>>(Validate))" />
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto mt-3 mb-3"
+                       OnClick="@(()=>form.Validate())">Validate</MudButton>
+            @if (form.IsTouched && form.IsValid)
+            {
+                <MudText Color="Color.Success">Success</MudText>
+            }
+            else
+            {
+                <MudText>IsTouched: @form.IsTouched, IsValid: @form.IsValid</MudText>
+            }
         </MudForm>
-	</MudItem>
+    </MudItem>
     <MudItem xs="12" md="12">
         <MudText Class="mb-n3" Typo="Typo.body2">
             <MudChip T="string">@(choice1.State ?? "Not selected")</MudChip><MudChip T="string">@(choice2.State ?? "Not selected")</MudChip><MudChip T="string">@(choice3.State ?? "Not selected")</MudChip>
@@ -76,7 +76,7 @@
     {
         editContext1 = new EditContext(choice1);
         editContext2 = new EditContext(choice2);
-    } 
+    }
 
     private static string[] states =
     {
@@ -111,7 +111,7 @@
     }
 
     private IEnumerable<string> Validate(string value)
-    {        
+    {
         if (string.IsNullOrWhiteSpace(value))
         {
             yield return "The State field is required";
@@ -128,7 +128,7 @@
     {
         [Required]
         [State]
-        public string State { get; set;}
+        public string State { get; set; }
     }
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter)]

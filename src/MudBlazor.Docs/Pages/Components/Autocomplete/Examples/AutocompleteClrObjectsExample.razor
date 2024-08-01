@@ -6,27 +6,27 @@
 
 <MudGrid>
     <MudItem xs="12" sm="6" md="4">
-        <MudAutocomplete T="Element" Label="Periodic Table Element" @bind-Value="value1" 
+        <MudAutocomplete T="Element" Label="Periodic Table Element" @bind-Value="value1"
                          SearchFunc="@Search" ToStringFunc="@(e=> e==null?null : $"{e.Name} ({e.Sign})")" />
     </MudItem>
     <MudItem xs="12" sm="6" md="4">
-        <MudAutocomplete T="Element" Label="Periodic Table Element" @bind-Value="value2" 
+        <MudAutocomplete T="Element" Label="Periodic Table Element" @bind-Value="value2"
                          SearchFunc="@Search" ToStringFunc="@(e=> e==null?null : $"{e.Name} ({e.Sign})")">
-            <ItemTemplate Context="e">                          
+            <ItemTemplate Context="e">
                 <MudText>
-                    <MudIcon Icon="@Icons.Material.Filled.CheckBoxOutlineBlank" Class="mb-n1 mr-3"/>@($"{e.Name} ({e.Sign})")
+                    <MudIcon Icon="@Icons.Material.Filled.CheckBoxOutlineBlank" Class="mb-n1 mr-3" />@($"{e.Name} ({e.Sign})")
                 </MudText>
             </ItemTemplate>
-            <ItemSelectedTemplate Context="e">                
+            <ItemSelectedTemplate Context="e">
                 <MudText>
-                    <MudIcon Icon="@Icons.Material.Filled.CheckBox" Class="mb-n1 mr-3"/>@($"{e.Name} ({e.Sign})")
+                    <MudIcon Icon="@Icons.Material.Filled.CheckBox" Class="mb-n1 mr-3" />@($"{e.Name} ({e.Sign})")
                 </MudText>
             </ItemSelectedTemplate>
         </MudAutocomplete>
     </MudItem>
     <MudItem xs="12" sm="6" md="4">
         <MudAutocomplete T="Element" Label="Periodic Table Element" @bind-Value="value3"
-                   SearchFunc="@Search" ItemDisabledFunc="@((Element e) => (e.Name.Contains("H")))" ToStringFunc="@(e=> e==null?null : $"{e.Name} ({e.Sign})")">
+                         SearchFunc="@Search" ItemDisabledFunc="@((Element e) => (e.Name.Contains("H")))" ToStringFunc="@(e=> e==null?null : $"{e.Name} ({e.Sign})")">
             <ItemDisabledTemplate>
                 <MudText>Not available: @context.ToString()</MudText>
             </ItemDisabledTemplate>
@@ -44,6 +44,6 @@
 
     private async Task<IEnumerable<Element>> Search(string value, CancellationToken token)
     {
-        return  await httpClient.GetFromJsonAsync<List<Element>>($"webapi/periodictable/{value}", token);
+        return await httpClient.GetFromJsonAsync<List<Element>>($"webapi/periodictable/{value}", token);
     }
 }

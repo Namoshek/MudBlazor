@@ -7,7 +7,7 @@
 <MudCheckBox @bind-Value="customstr" Converter="@(new CustomStringToBoolConverter())"> custom string: "@(customstr)"</MudCheckBox>
 <MudCheckBox @bind-Value="obj" Converter="@(new ObjectToBoolConverter())">boxed bool: "@(obj.ToString())"</MudCheckBox>
 
-@code{ 
+@code {
     public bool boolean { get; set; } = true;
     public bool? nullable { get; set; } = true;
     public int integer { get; set; } = 1;
@@ -79,4 +79,5 @@
                 return null;
             }
         }
-    } }
+    }
+}

@@ -2,9 +2,7 @@
 
 <MudStack>
     <MudColorPicker ThrottleInterval="Interval" DragEffect="@Draggable" PickerVariant="PickerVariant.Static" />
-
     <MudNumericField T="int" @bind-Value="Interval" Label="Throttle interval" />
-
     <MudCheckBox T="bool" @bind-Value="Draggable" Label="Allow dragging the pointer" />
 </MudStack>
 

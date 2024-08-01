@@ -1,10 +1,11 @@
 ﻿@namespace MudBlazor.Docs.Examples
 @using MudBlazor.Utilities
 
-
-<MudPaper Elevation="0" Class="mud-width-full mud-height-full d-flex justify-center align-end pb-8" MinHeight="600px" Style="@($"background-image:linear-gradient({_degrees}deg, {_gradientPrimary.ToString(MudColorOutputFormats.RGBA)} 0%, {_gradientSecondary.ToString(MudColorOutputFormats.RGBA)} 100%);")">
+<MudPaper Elevation="0" Class="mud-width-full mud-height-full d-flex justify-center align-end pb-8" MinHeight="600px"
+          Style="@($"background-image:linear-gradient({_degrees}deg, {_gradientPrimary.ToString(MudColorOutputFormats.RGBA)} 0%, {_gradientSecondary.ToString(MudColorOutputFormats.RGBA)} 100%);")">
     <MudPaper Class="d-flex">
-        <MudColorPicker Rounded="true" Class="rounded-tr-0" PickerVariant="PickerVariant.Static" ShowModeSwitch="false" Value="_pickerColor" ValueChanged="UpdateSelectedColor" />
+        <MudColorPicker Rounded="true" Class="rounded-tr-0" PickerVariant="PickerVariant.Static" ShowModeSwitch="false"
+                        Value="_pickerColor" ValueChanged="UpdateSelectedColor" />
         <div class="pa-2">
             <MudText Typo="Typo.h6" Class="mx-1">Gradient Colors</MudText>
 
@@ -20,7 +21,6 @@
         </div>
     </MudPaper>
 </MudPaper>
-
 
 @code {
     private MudColor _gradientPrimary = "#594AE2";

@@ -1,7 +1,5 @@
 ﻿@namespace MudBlazor.Docs.Examples
 
-
-
 <MudGrid>
     <MudItem md="3">
         <MudPaper Class="pa-4" Elevation="0">
@@ -34,13 +32,13 @@
             {
                 <MudText>MudText</MudText>
             }
-            else if(SelectedTestComponent == "MudAvatar")
+            else if (SelectedTestComponent == "MudAvatar")
             {
                 <MudAvatar Size="Size.Large" Class="ma-2">
                     <MudImage Src="images/mony.jpg" />
                 </MudAvatar>
             }
-            else if(SelectedTestComponent == "MudChip")
+            else if (SelectedTestComponent == "MudChip")
             {
                 <MudChip T="string" Label="true" Color="Color.Warning" Style="color:black;">Radioactive Areas</MudChip>
             }
@@ -79,10 +77,8 @@
     public bool Overlap { get; set; }
     public bool Bordered { get; set; }
     public string BadgeIcon { get; set; }
-
     public string SelectedTestComponent { get; set; } = "MudChip";
     public string AddNumber { get; set; } = "1";
-
     public int? BadgeContent { get; set; }
 
     public void OnSelectedTestComponent(string value)
@@ -104,7 +100,7 @@
 
     public void AddValue()
     {
-        if(BadgeContent == null)
+        if (BadgeContent == null)
         {
             AddNumber = "25";
             BadgeContent = 1;

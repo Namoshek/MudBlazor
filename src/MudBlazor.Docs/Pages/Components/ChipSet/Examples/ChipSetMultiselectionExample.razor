@@ -11,10 +11,12 @@
 </MudChipSet>
 
 <div class="d-flex flex-column align-center">
-    @if (_selected is { Count: > 0 }) {
+    @if (_selected is { Count: > 0 })
+    {
         <MudText>You selected @string.Join(", ", _selected.OrderBy(x => x))</MudText>
     }
-    else {
+    else
+    {
         <MudText>Nothing selected.</MudText>
     }
     <MudCheckBox @bind-Value="_checkMark">Check marks</MudCheckBox>
@@ -25,4 +27,3 @@
     private bool _checkMark = true;
     private IReadOnlyCollection<string> _selected;
 }
-

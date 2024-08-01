@@ -1,4 +1,5 @@
 ﻿@namespace MudBlazor.Docs.Examples
+
 <MudChipSet T="string" AllClosable OnClose="Closed">
     @foreach (var value in _values)
     {
@@ -7,9 +8,8 @@
 </MudChipSet>
 
 <div class="d-flex flex-column align-center">
-        <MudButton StartIcon="@Icons.Material.Filled.Add" OnClick="Add">Add chip</MudButton>
+    <MudButton StartIcon="@Icons.Material.Filled.Add" OnClick="Add">Add chip</MudButton>
 </div>
-
 
 @code
 {
@@ -18,4 +18,3 @@
     public void Add() => _values.Add("Value " + (_i++));
     public void Closed(MudChip<string> chip) => _values.Remove(chip.Text);
 }
-

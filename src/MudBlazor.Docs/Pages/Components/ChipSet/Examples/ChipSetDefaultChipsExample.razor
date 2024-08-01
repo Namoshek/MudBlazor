@@ -1,4 +1,5 @@
 ﻿@namespace MudBlazor.Docs.Examples
+
 <MudChipSet @bind-SelectedValues="_selected" SelectionMode="SelectionMode.MultiSelection" CheckMark>
     <MudChip Value="@("Milk")" />
     <MudChip Value="@("Eggs")" />
@@ -24,4 +25,3 @@
 {
     private IReadOnlyCollection<string> _selected = ["Milk", "Cornflakes"];
 }
-
