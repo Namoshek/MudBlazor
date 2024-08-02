@@ -14,16 +14,14 @@
 
 @code {
     private MudDataGrid<Item> DataGrid;
-
     private bool NaturalSortingEnabled = true;
-
     private IEnumerable<Item> _items = new List<Item>()
     {
-        new Item("1", 42, "555"), 
-        new Item("10", 73, "7"), 
-        new Item("2", 11, "4444"), 
+        new Item("1", 42, "555"),
+        new Item("10", 73, "7"),
+        new Item("2", 11, "4444"),
         new Item("1_10", 33, "33333"),
-        new Item("1_2", 99, "66"), 
+        new Item("1_2", 99, "66"),
         new Item("1_11", 44, "1111111"),
         new Item("0", 55, "222222")
     };
@@ -72,5 +70,5 @@
             Value = value;
             Misc = misc;
         }
-    }   
+    }
 }

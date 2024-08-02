@@ -25,8 +25,8 @@
 </MudDataGrid>
 
 @code {
-    MudDataGrid<Element> dataGrid;
-    string searchString = null;
+    private MudDataGrid<Element> dataGrid;
+    private string searchString = null;
 
     /// <summary>
     /// Here we simulate getting the paged, filtered and ordered data from the server
@@ -37,22 +37,22 @@
         await Task.Delay(300);
         data = data.Where(element =>
         {
-            if(string.IsNullOrWhiteSpace(searchString))
+            if (string.IsNullOrWhiteSpace(searchString))
                 return true;
-            if(element.Sign.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            if (element.Sign.Contains(searchString, StringComparison.OrdinalIgnoreCase))
                 return true;
-            if(element.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            if (element.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase))
                 return true;
-            if($"{element.Number} {element.Position} {element.Molar}".Contains(searchString))
+            if ($"{element.Number} {element.Position} {element.Molar}".Contains(searchString))
                 return true;
             return false;
         }).ToArray();
         var totalItems = data.Count();
 
         var sortDefinition = state.SortDefinitions.FirstOrDefault();
-        if(sortDefinition != null)
+        if (sortDefinition != null)
         {
-            switch(sortDefinition.SortBy)
+            switch (sortDefinition.SortBy)
             {
                 case nameof(Element.Number):
                     data = data.OrderByDirection(
@@ -88,7 +88,8 @@
         }
 
         var pagedData = data.Skip(state.Page * state.PageSize).Take(state.PageSize).ToArray();
-        return new GridData<Element> {
+        return new GridData<Element>
+        {
             TotalItems = totalItems,
             Items = pagedData
         };

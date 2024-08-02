@@ -3,13 +3,15 @@
 @namespace MudBlazor.Docs.Examples
 @inject HttpClient httpClient
 
-<MudDataGrid T="Element" @ref="grid" Items="_elements" DragDropColumnReordering="_dragDropReorderingEnabled" ColumnsPanelReordering="_columnsPanelReorderingEnabled"
-             ColumnResizeMode="ResizeMode.Container" Hideable="_hideable" Filterable="_filterable" Groupable="_groupable" FilterMode="_filterMode" ShowMenuIcon="true">
+<MudDataGrid T="Element" @ref="grid" Items="_elements" DragDropColumnReordering="_dragDropReorderingEnabled"
+             ColumnsPanelReordering="_columnsPanelReorderingEnabled" ColumnResizeMode="ResizeMode.Container"
+             Hideable="_hideable" Filterable="_filterable" Groupable="_groupable" FilterMode="_filterMode" ShowMenuIcon="true">
     <Columns>
-        <SelectColumn T="Element"/>
+        <SelectColumn T="Element" />
         <PropertyColumn Property="x => x.Number" Title="Nr" />
         <PropertyColumn Property="x => x.Sign" Hidden="true" DragAndDropEnabled="false" Groupable="false" Sortable="false" Filterable="false" />
-        <PropertyColumn Property="x => x.Name" Title="Name" Hidden="false" DragAndDropEnabled="true" Groupable="true" Sortable="true" Filterable="true" Grouping="false" />
+        <PropertyColumn Property="x => x.Name" Title="Name" Hidden="false" DragAndDropEnabled="true" Groupable="true"
+                        Sortable="true" Filterable="true" Grouping="false" />
         <PropertyColumn Property="x => x.Position" Filterable="false" Hideable="false" />
         <PropertyColumn Property="x => x.Molar" Title="Molar mass" @bind-Hidden="_hideMolar" @bind-Grouping="_groupMolar" Hideable="true" />
         <PropertyColumn Property="x => x.Group" Hidden="_hideCategory" Grouping="_groupCategory" Title="Category" />
@@ -51,10 +53,8 @@
     </MudRadioGroup>
 </div>
 
-
 @code {
     private IEnumerable<Element> _elements = new List<Element>();
-
     private DataGridFilterMode _filterMode = DataGridFilterMode.Simple;
     private bool _dragDropReorderingEnabled = true;
     private bool _columnsPanelReorderingEnabled = true;
@@ -69,9 +69,9 @@
 
     private MudBlazor.Converter<bool, bool?> _oppositeBoolConverter = new()
     {
-            SetFunc = value => !value,
-            GetFunc = value => !value ?? true,
-        };
+        SetFunc = value => !value,
+        GetFunc = value => !value ?? true,
+    };
 
     protected override async Task OnInitializedAsync()
     {
@@ -79,7 +79,7 @@
     }
 
     private async Task HideColumnsAsync(bool hide)
-    {        
+    {
         foreach (var column in grid.RenderedColumns)
         {
             if (hide)

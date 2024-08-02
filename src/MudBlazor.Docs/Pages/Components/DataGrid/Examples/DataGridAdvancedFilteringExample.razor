@@ -11,22 +11,22 @@
                 <MudIconButton OnClick="@OpenFilter" Icon="@_icon" Size="@Size.Small" />
                 <MudOverlay Visible="@_filterOpen" OnClick="@(() => _filterOpen = false)" />
                 <MudPopover Open="@_filterOpen" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter"
-                    Style="width:150px">
-		           <MudStack Spacing="0">
-                       <MudCheckBox T="bool" Label="Select All" Size="@Size.Small" Value="@_selectAll" ValueChanged="@SelectAll" />
-                       <MudStack Spacing="0" Style="overflow-y:auto;max-height:250px">
-                           @foreach (var item in context.Items)
-                           {
+                            Style="width:150px">
+                    <MudStack Spacing="0">
+                        <MudCheckBox T="bool" Label="Select All" Size="@Size.Small" Value="@_selectAll" ValueChanged="@SelectAll" />
+                        <MudStack Spacing="0" Style="overflow-y:auto;max-height:250px">
+                            @foreach (var item in context.Items)
+                            {
                                 <MudCheckBox T="bool" Label="@($"{item.Sign}")" Size="@Size.Small" Value="@(_selectedItems.Contains(item))"
                                              ValueChanged="@((value) => SelectedChanged(value, item))" />
-                           }
-                       </MudStack>
-                       <MudStack Row="true">
+                            }
+                        </MudStack>
+                        <MudStack Row="true">
                             <MudButton OnClick="@(() => ClearFilterAsync(context))">Clear</MudButton>
                             <MudButton Color="@Color.Primary" OnClick="@(() => ApplyFilterAsync(context))">Filter</MudButton>
-                       </MudStack>
-                   </MudStack>
-	            </MudPopover>
+                        </MudStack>
+                    </MudStack>
+                </MudPopover>
             </FilterTemplate>
         </PropertyColumn>
         <PropertyColumn Property="x => x.Name" />
@@ -40,14 +40,13 @@
 </MudDataGrid>
 
 @code {
-    IEnumerable<Element> Elements = new List<Element>();
-    HashSet<Element> _selectedItems = new();
-    HashSet<Element> _filterItems = new();
-    FilterDefinition<Element> _filterDefinition;
-    bool _selectAll = true;
-    string _icon = Icons.Material.Outlined.FilterAlt;
-
-    bool _filterOpen = false;
+    private IEnumerable<Element> Elements = new List<Element>();
+    private HashSet<Element> _selectedItems = new();
+    private HashSet<Element> _filterItems = new();
+    private FilterDefinition<Element> _filterDefinition;
+    private bool _selectAll = true;
+    private string _icon = Icons.Material.Outlined.FilterAlt;
+    private bool _filterOpen = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -55,12 +54,12 @@
         _selectedItems = Elements.ToHashSet();
         _filterItems = Elements.ToHashSet();
         _filterDefinition = new FilterDefinition<Element>
-        {
-            FilterFunction = x => _filterItems.Contains(x)
-        };
+            {
+                FilterFunction = x => _filterItems.Contains(x)
+            };
     }
 
-    void OpenFilter()
+    private void OpenFilter()
     {
         _filterOpen = true;
     }

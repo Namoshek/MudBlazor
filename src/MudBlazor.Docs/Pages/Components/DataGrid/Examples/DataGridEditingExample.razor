@@ -4,8 +4,8 @@
 @inject HttpClient httpClient
 
 <MudDataGrid T="Element" Items="@Elements.Take(4)" ReadOnly="@_readOnly" EditMode="@(_isCellEditMode ? DataGridEditMode.Cell : DataGridEditMode.Form)"
-    StartedEditingItem="@StartedEditingItem" CanceledEditingItem="@CanceledEditingItem" CommittedItemChanges="@CommittedItemChanges"
-    Bordered="true" Dense="true" EditTrigger="@(_editTriggerRowClick ? DataGridEditTrigger.OnRowClick : DataGridEditTrigger.Manual)">
+             StartedEditingItem="@StartedEditingItem" CanceledEditingItem="@CanceledEditingItem" CommittedItemChanges="@CommittedItemChanges"
+             Bordered="true" Dense="true" EditTrigger="@(_editTriggerRowClick ? DataGridEditTrigger.OnRowClick : DataGridEditTrigger.Manual)">
     <Columns>
         <PropertyColumn Property="x => x.Number" Title="Nr" Editable="false" />
         <PropertyColumn Property="x => x.Sign" />
@@ -46,10 +46,10 @@
         {
             <MudText Typo="@Typo.body2">@message</MudText>
         }
-        @if(_events.Count > 0) 
+        @if (_events.Count > 0)
         {
             <div class="d-flex">
-                <MudSpacer/>
+                <MudSpacer />
                 <MudButton Class="mt-3" ButtonType="ButtonType.Button" Variant="Variant.Filled" OnClick="@(() => _events.Clear())">Clear</MudButton>
             </div>
         }
@@ -68,7 +68,7 @@
         Elements = await httpClient.GetFromJsonAsync<List<Element>>("webapi/periodictable");
     }
 
-    // events
+    // Events
     void StartedEditingItem(Element item)
     {
         _events.Insert(0, $"Event = StartedEditingItem, Data = {System.Text.Json.JsonSerializer.Serialize(item)}");

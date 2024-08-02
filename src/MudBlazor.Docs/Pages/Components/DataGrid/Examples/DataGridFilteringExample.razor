@@ -3,7 +3,7 @@
 @namespace MudBlazor.Docs.Examples
 @inject HttpClient httpClient
 
-<MudDataGrid Items="@Elements" Filterable="true" FilterMode="@_filterMode" FilterCaseSensitivity="@_caseSensitivity">
+<MudDataGrid Items="@elements" Filterable="true" FilterMode="@filterMode" FilterCaseSensitivity="@caseSensitivity">
     <Columns>
         <PropertyColumn Property="x => x.Number" Title="Nr" Filterable="false" />
         <PropertyColumn Property="x => x.Sign" />
@@ -18,7 +18,7 @@
 </MudDataGrid>
 
 <div class="d-flex flex-wrap mt-4">
-    <MudRadioGroup T="DataGridFilterMode" @bind-Value="@_filterMode">
+    <MudRadioGroup T="DataGridFilterMode" @bind-Value="@filterMode">
         <MudRadio Dense="true" Value="@DataGridFilterMode.Simple" Color="Color.Primary">Simple</MudRadio>
         <MudRadio Dense="true" Value="@DataGridFilterMode.ColumnFilterMenu" Color="Color.Tertiary">Column Menu</MudRadio>
         <MudRadio Dense="true" Value="@DataGridFilterMode.ColumnFilterRow">Column Row</MudRadio>
@@ -26,7 +26,7 @@
 </div>
 
 <div class="d-flex flex-wrap mt-4">
-    <MudRadioGroup T="DataGridFilterCaseSensitivity" @bind-Value="@_caseSensitivity">
+    <MudRadioGroup T="DataGridFilterCaseSensitivity" @bind-Value="@caseSensitivity">
         <MudRadio Dense="true" Value="@DataGridFilterCaseSensitivity.Default" Color="Color.Primary">Default Case Sensitivity</MudRadio>
         <MudRadio Dense="true" Value="@DataGridFilterCaseSensitivity.CaseInsensitive" Color="Color.Tertiary">Case Insensitive</MudRadio>
     </MudRadioGroup>
@@ -34,12 +34,12 @@
 
 
 @code {
-    IEnumerable<Element> Elements = new List<Element>();
-    DataGridFilterMode _filterMode = DataGridFilterMode.Simple;
-    DataGridFilterCaseSensitivity _caseSensitivity = DataGridFilterCaseSensitivity.Default;
+    private IEnumerable<Element> elements = new List<Element>();
+    private DataGridFilterMode filterMode = DataGridFilterMode.Simple;
+    private DataGridFilterCaseSensitivity caseSensitivity = DataGridFilterCaseSensitivity.Default;
 
     protected override async Task OnInitializedAsync()
     {
-        Elements = await httpClient.GetFromJsonAsync<List<Element>>("webapi/periodictable");
+        elements = await httpClient.GetFromJsonAsync<List<Element>>("webapi/periodictable");
     }
 }

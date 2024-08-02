@@ -3,7 +3,7 @@
 @namespace MudBlazor.Docs.Examples
 @inject HttpClient httpClient
 
-<MudDataGrid Items="@Elements.Take(4)">
+<MudDataGrid Items="@elements.Take(4)">
     <Columns>
         <PropertyColumn Property="x => x.Number" Title="Nr" />
         <PropertyColumn Property="x => x.Sign" />
@@ -13,11 +13,11 @@
     </Columns>
 </MudDataGrid>
 
-@code { 
-    private IEnumerable<Element> Elements = new List<Element>();
+@code {
+    private IEnumerable<Element> elements = new List<Element>();
 
     protected override async Task OnInitializedAsync()
     {
-        Elements = await httpClient.GetFromJsonAsync<List<Element>>("webapi/periodictable");
+        elements = await httpClient.GetFromJsonAsync<List<Element>>("webapi/periodictable");
     }
 }

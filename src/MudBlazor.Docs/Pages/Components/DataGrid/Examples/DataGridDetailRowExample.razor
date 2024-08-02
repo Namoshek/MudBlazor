@@ -3,8 +3,7 @@
 @namespace MudBlazor.Docs.Examples
 @inject HttpClient httpClient
 
-<MudDataGrid Items="@Elements"
-             ReadOnly="@_isReadOnly" EditMode="@DataGridEditMode.Cell">
+<MudDataGrid Items="@Elements" ReadOnly="@_isReadOnly" EditMode="@DataGridEditMode.Cell">
     <Columns>
         <HierarchyColumn T="Element" ButtonDisabledFunc="@(x => x.Sign == "He")" InitiallyExpandedFunc="@(x => x.Sign == "Li")" />
         <PropertyColumn Property="x => x.Number" Title="Nr" />
@@ -35,14 +34,12 @@
     <MudSwitch T="bool" @bind-Value="_isReadOnly" Color="@Color.Primary">Read Only</MudSwitch>
 </div>
 
-
-@code { 
+@code {
     private IEnumerable<Element> Elements = new List<Element>();
+    private bool _isReadOnly = true;
 
     protected override async Task OnInitializedAsync()
     {
         Elements = await httpClient.GetFromJsonAsync<List<Element>>("webapi/periodictable");
     }
-    
-    private bool _isReadOnly = true;
 }

@@ -3,8 +3,8 @@
 @namespace MudBlazor.Docs.Examples
 @inject HttpClient httpClient
 
-<MudDataGrid Items="@Elements.Take(4)" Hover="@_hover" Dense="@_dense" Striped="@_striped" Bordered="@_bordered"
-    RowStyleFunc="@_rowStyleFunc">
+<MudDataGrid Items="@elements.Take(4)" Hover="@hover" Dense="@dense" Striped="@striped"
+             Bordered="@bordered" RowStyleFunc="@_rowStyleFunc">
     <Columns>
         <PropertyColumn Property="x => x.Number" Title="Nr" />
         <PropertyColumn Property="x => x.Sign" />
@@ -15,18 +15,19 @@
 </MudDataGrid>
 
 <div class="d-flex flex-wrap mt-4">
-    <MudSwitch @bind-Value="_hover" Color="Color.Primary">Hover</MudSwitch>
-    <MudSwitch @bind-Value="_dense" Color="Color.Secondary">Dense</MudSwitch>
-    <MudSwitch @bind-Value="_striped" Color="Color.Tertiary">Striped</MudSwitch>
-    <MudSwitch @bind-Value="_bordered" Color="Color.Warning">Bordered</MudSwitch>
+    <MudSwitch @bind-Value="hover" Color="Color.Primary">Hover</MudSwitch>
+    <MudSwitch @bind-Value="dense" Color="Color.Secondary">Dense</MudSwitch>
+    <MudSwitch @bind-Value="striped" Color="Color.Tertiary">Striped</MudSwitch>
+    <MudSwitch @bind-Value="bordered" Color="Color.Warning">Bordered</MudSwitch>
 </div>
 
 @code {
-    private IEnumerable<Element> Elements = new List<Element>();
-    private bool _hover;
-    private bool _dense;
-    private bool _striped;
-    private bool _bordered;
+    private IEnumerable<Element> elements = new List<Element>();
+    private bool hover;
+    private bool dense;
+    private bool striped;
+    private bool bordered;
+
     // style the rows where the Element.Position == 0 to have italic text.
     private Func<Element, int, string> _rowStyleFunc => (x, i) =>
     {
@@ -35,6 +36,7 @@
 
         return "";
     };
+
     // style the cells according to the element's physical classification and the molar mass.
     private Func<Element, string> _cellStyleFunc => x =>
     {
@@ -60,6 +62,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        Elements = await httpClient.GetFromJsonAsync<List<Element>>("webapi/periodictable");
+        elements = await httpClient.GetFromJsonAsync<List<Element>>("webapi/periodictable");
     }
 }

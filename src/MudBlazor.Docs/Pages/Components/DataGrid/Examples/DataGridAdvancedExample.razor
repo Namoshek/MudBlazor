@@ -4,12 +4,12 @@
 @inject HttpClient httpClient
 
 <MudDataGrid T="Element" MultiSelection="true" Items="@Elements" SortMode="SortMode.Multiple" Filterable="true" QuickFilter="@_quickFilter"
-    Hideable="true" RowClick="@RowClicked" RowContextMenuClick="RowRightClicked" SelectedItemsChanged="@SelectedItemsChanged">
+             Hideable="true" RowClick="@RowClicked" RowContextMenuClick="RowRightClicked" SelectedItemsChanged="@SelectedItemsChanged">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Periodic Elements</MudText>
         <MudSpacer />
         <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
-            AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
     </ToolBarContent>
     <Columns>
         <SelectColumn T="Element" />
@@ -35,10 +35,10 @@
         {
             <MudText Typo="@Typo.body2">@message</MudText>
         }
-        @if(_events.Count > 0) 
+        @if (_events.Count > 0)
         {
             <div class="d-flex">
-                <MudSpacer/>
+                <MudSpacer />
                 <MudButton Class="mt-3" ButtonType="ButtonType.Button" Variant="Variant.Filled" OnClick="@(() => _events.Clear())">Clear</MudButton>
             </div>
         }
@@ -50,16 +50,12 @@
     private string _searchString;
     private bool _sortNameByLength;
     private List<string> _events = new();
-    // custom sort by name length
-    private Func<Element, object> _sortBy => x =>
-    {
-        if (_sortNameByLength)
-            return x.Name.Length;
-        else
-            return x.Name;
-    };
-    // quick filter - filter globally across multiple columns with the same input
-    private Func<Element, bool> _quickFilter => x =>
+
+    // Custom sort function to sort by name length.
+    private Func<Element, object> _sortBy => (x) => _sortNameByLength ? x.Name.Length : x.Name;
+
+    // Quick filter to filter globally across multiple columns with the same input.
+    private Func<Element, bool> _quickFilter => (x) =>
     {
         if (string.IsNullOrWhiteSpace(_searchString))
             return true;
@@ -81,12 +77,12 @@
         Elements = await httpClient.GetFromJsonAsync<List<Element>>("webapi/periodictable");
     }
 
-    // events
+    // Events
     void RowClicked(DataGridRowClickEventArgs<Element> args)
     {
         _events.Insert(0, $"Event = RowClick, Index = {args.RowIndex}, Data = {System.Text.Json.JsonSerializer.Serialize(args.Item)}");
     }
-    
+
     void RowRightClicked(DataGridRowClickEventArgs<Element> args)
     {
         _events.Insert(0, $"Event = RowRightClick, Index = {args.RowIndex}, Data = {System.Text.Json.JsonSerializer.Serialize(args.Item)}");

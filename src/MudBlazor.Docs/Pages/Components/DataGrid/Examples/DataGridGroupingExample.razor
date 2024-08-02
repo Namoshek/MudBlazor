@@ -4,7 +4,7 @@
 @inject HttpClient httpClient
 
 <MudDataGrid @ref="dataGrid" MultiSelection="true" Items="@Elements" Filterable="true"
-    Hideable="true" Groupable="true" GroupExpanded="false" GroupClassFunc="GroupClassFunc">
+             Hideable="true" Groupable="true" GroupExpanded="false" GroupClassFunc="GroupClassFunc">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Periodic Elements</MudText>
         <MudSpacer />
@@ -19,7 +19,10 @@
             <GroupTemplate>
                 @if (_customizeGroupTemplate)
                 {
-                    <span style="font-weight:bold">Group: @context.Grouping.Key <MudChip Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small">total @context.Grouping.Count()</MudChip></span>
+                    <span style="font-weight:bold">
+                        Group: @context.Grouping.Key
+                        <MudChip Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small">total @context.Grouping.Count()</MudChip>
+                    </span>
                 }
                 else
                 {
@@ -41,23 +44,25 @@
 </div>
 
 @code {
-    IEnumerable<Element> Elements = new List<Element>();
-    MudDataGrid<Element> dataGrid;
-    bool _customizeGroupTemplate;
-    static bool _customizeGroupBy;
-    static string[] _nonmetals = new string[] { "H", "He","N", "O", "F", "Ne", "Cl", "Ar", "Kr", "Xe", "Rn", "Br", "C", "P", "Se", "Se", "I" };
-    Func<Element, object> _groupBy = x => 
+    private static string[] _nonmetals = new string[] { "H", "He", "N", "O", "F", "Ne", "Cl", "Ar", "Kr", "Xe", "Rn", "Br", "C", "P", "Se", "Se", "I" };
+    private static bool _customizeGroupBy;
+
+    private IEnumerable<Element> Elements = new List<Element>();
+    private MudDataGrid<Element> dataGrid;
+    private bool _customizeGroupTemplate;
+
+    private Func<Element, object> _groupBy = x =>
     {
-        if (_customizeGroupBy)
-            return _nonmetals.Contains(x.Sign) ? "Nonmetal":  "Metal";
-        return x.Group;
+        return _customizeGroupBy
+            ? _nonmetals.Contains(x.Sign) ? "Nonmetal" : "Metal"
+            : x.Group;
     };
 
     private string GroupClassFunc(GroupDefinition<Element> item)
     {
         return item.Grouping.Key?.ToString() == "Nonmetal" || item.Grouping.Key?.ToString() == "Other"
-                ? "mud-theme-warning"
-                : string.Empty;
+            ? "mud-theme-warning"
+            : string.Empty;
     }
 
     protected override async Task OnInitializedAsync()
